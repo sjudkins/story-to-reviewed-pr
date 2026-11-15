@@ -7,7 +7,7 @@ V1 supports only sample/shipping.py via a restricted expression language. Unknow
 criteria need human review. Fixtures are separate from real-model performance.
 
 - [x] 1. Foundation: package, sample/story, fixture walkthrough, CI, setup README.
-- [ ] 2. Analysis: local/GitHub loading, structured plan, ambiguity, real adapter.
+- [x] 2. Analysis implementation: local/GitHub loading, structured plan, ambiguity, real adapter.
 - [ ] 3. Implementation: approval, workspace, bounds, trusted evidence.
 - [ ] 4. Delivery: draft PRs, rerun safety, evaluations, measured results.
 - [ ] 5. Portfolio: demo capture, diagram, decisions, clean setup, handoff/project PR.
