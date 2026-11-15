@@ -2,4 +2,4 @@
 
 
 def shipping_fee(subtotal):
-    return 5
+    return 0 if subtotal >= 50 else 5
