@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "story-to-reviewed-pr"
+version = "0.1.0"
+description = "Bounded story-to-PR workflow with criterion evidence"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+story-pr = "story_pr.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["story_pr*"]
