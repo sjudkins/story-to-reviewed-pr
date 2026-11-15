@@ -1,0 +1,4 @@
+# Explicit opt-in configuration for the public synthetic demonstration.
+repository = "sjudkins/story-to-reviewed-pr"
+base_branch = "codex/story-to-reviewed-pr"
+publication_enabled = true

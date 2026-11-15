@@ -23,10 +23,21 @@ def main(argv=None):
     execute.add_argument("--approve", required=True, help="Full SHA256 digest from reviewed plan")
     execute.add_argument("--root", default=".")
     execute.add_argument("--runs", default=".runs")
+    publish = commands.add_parser("publish", help="Explicitly opt into draft PR publication")
+    publish.add_argument("--run", required=True)
+    publish.add_argument("--config", required=True)
+    publish.add_argument("--git-auth", action="store_true", help="Use stored Git credential, never print it")
+    commands.add_parser("evaluate", help="Ten synthetic fixture safety cases, not a model benchmark")
     args = parser.parse_args(argv)
     try:
         if args.command == "demo":
             result = walkthrough(args.story)
+        elif args.command == "publish":
+            from .delivery import publish
+            result = publish(args.run, args.config, args.git_auth)
+        elif args.command == "evaluate":
+            from .evaluation import evaluate
+            result = evaluate()
         elif args.command == "execute":
             from .execution import execute
             result = execute(json.loads(Path(args.plan).read_text(encoding="utf-8")),
@@ -47,6 +58,6 @@ def main(argv=None):
                 json.dump(result, output, indent=2)
         print(json.dumps(result, indent=2))
         return 1 if result.get("status") in ("failed", "blocked", "needs_clarification") else 0
-    except (WorkflowError, OSError, ValueError) as exc:
+    except (WorkflowError, OSError, ValueError, KeyError, TypeError) as exc:
         print(f"Error: {exc}")
         return 2

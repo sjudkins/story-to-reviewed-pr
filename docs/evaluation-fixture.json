@@ -1,0 +1,91 @@
+{
+  "mode": "fixture",
+  "model": null,
+  "api_calls": 0,
+  "cost_usd": 0,
+  "cases": [
+    {
+      "case": "success",
+      "expected": "passed",
+      "observed": "passed",
+      "matched_expectation": true,
+      "publication_allowed": true,
+      "latency_ms": 3.716
+    },
+    {
+      "case": "boundary_failure",
+      "expected": "failed",
+      "observed": "failed",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 3.169
+    },
+    {
+      "case": "constant_fee_failure",
+      "expected": "failed",
+      "observed": "failed",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 5.526
+    },
+    {
+      "case": "missing_criteria",
+      "expected": "needs_clarification",
+      "observed": "needs_clarification",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 0.028
+    },
+    {
+      "case": "ambiguity",
+      "expected": "needs_clarification",
+      "observed": "needs_clarification",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 0.018
+    },
+    {
+      "case": "unsupported",
+      "expected": "needs_clarification",
+      "observed": "needs_clarification",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 0.014
+    },
+    {
+      "case": "injection",
+      "expected": "needs_clarification",
+      "observed": "needs_clarification",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 0.012
+    },
+    {
+      "case": "unsafe_expression",
+      "expected": "blocked",
+      "observed": "blocked",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 0.056
+    },
+    {
+      "case": "approval_mismatch",
+      "expected": "blocked",
+      "observed": "blocked",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 0.027
+    },
+    {
+      "case": "duplicate_criteria",
+      "expected": "needs_clarification",
+      "observed": "needs_clarification",
+      "matched_expectation": true,
+      "publication_allowed": false,
+      "latency_ms": 0.011
+    }
+  ],
+  "expectations_met": 10,
+  "count": 10,
+  "note": "Safety-case outcome agreement, not model completion rate"
+}
