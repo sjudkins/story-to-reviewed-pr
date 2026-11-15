@@ -18,10 +18,19 @@ def main(argv=None):
     plan.add_argument("--repo", help="Explicit GitHub Issue source owner/name")
     plan.add_argument("--mode", choices=["fixture", "real"], default="fixture")
     plan.add_argument("--out", default=".runs/plan.json")
+    execute = commands.add_parser("execute", help="Explicitly approve and verify in an isolated sample copy")
+    execute.add_argument("--plan", required=True)
+    execute.add_argument("--approve", required=True, help="Full SHA256 digest from reviewed plan")
+    execute.add_argument("--root", default=".")
+    execute.add_argument("--runs", default=".runs")
     args = parser.parse_args(argv)
     try:
         if args.command == "demo":
             result = walkthrough(args.story)
+        elif args.command == "execute":
+            from .execution import execute
+            result = execute(json.loads(Path(args.plan).read_text(encoding="utf-8")),
+                             args.approve, args.root, args.runs)
         else:
             if args.issue and not args.repo:
                 raise WorkflowError("--issue requires an explicit --repo")
@@ -37,7 +46,7 @@ def main(argv=None):
             with path.open("x", encoding="utf-8") as output:
                 json.dump(result, output, indent=2)
         print(json.dumps(result, indent=2))
-        return 0
+        return 1 if result.get("status") in ("failed", "blocked", "needs_clarification") else 0
     except (WorkflowError, OSError, ValueError) as exc:
         print(f"Error: {exc}")
         return 2
