@@ -47,7 +47,8 @@ def main(argv=None):
                 raise WorkflowError("--issue requires an explicit --repo")
             story = GitHub(args.repo).issue(args.issue) if args.issue else read_story(args.story)
             proposal, usage = None, None
-            if args.mode == "real":
+            preliminary = analyze(story, mode=args.mode)
+            if args.mode == "real" and not preliminary["questions"]:
                 from .provider import propose
                 proposal, usage = propose(story)
             result = analyze(story, proposal, args.mode, usage)
@@ -57,6 +58,8 @@ def main(argv=None):
             with path.open("x", encoding="utf-8") as output:
                 json.dump(result, output, indent=2)
         print(json.dumps(result, indent=2))
+        if args.command == "evaluate" and result["expectations_met"] != result["count"]:
+            return 1
         return 1 if result.get("status") in ("failed", "blocked", "needs_clarification") else 0
     except (WorkflowError, OSError, ValueError, KeyError, TypeError) as exc:
         print(f"Error: {exc}")

@@ -33,6 +33,8 @@ def extract_issue(issue):
 
 
 def analyze(story, proposal=None, mode="fixture", usage=None):
+    if len(json.dumps(story)) > 32_000:
+        raise WorkflowError("Story exceeds 32 KB limit")
     title = story.get("title")
     criteria = story.get("criteria", [])
     if not isinstance(title, str) or not title.strip() or len(title) > 300:
@@ -54,9 +56,9 @@ def analyze(story, proposal=None, mode="fixture", usage=None):
         mapped.append({"id": f"AC{index}", "text": text,
                        "verification": "trusted shipping examples" if supported else "human review required"})
     # Fixture is deliberately authored; no story-provided expressions are accepted.
-    proposal = proposal or {"expression": "0 if subtotal >= 50 else 5", "questions": [],
-                            "summary": "Change the shipping fee at the 50 dollar boundary."}
-    if set(proposal) != {"expression", "questions", "summary"}:
+    proposal = {"expression": "0 if subtotal >= 50 else 5", "questions": [],
+                "summary": "Change the shipping fee at the 50 dollar boundary."} if proposal is None else proposal
+    if not isinstance(proposal, dict) or set(proposal) != {"expression", "questions", "summary"}:
         raise WorkflowError("Provider returned an invalid plan shape")
     if not isinstance(proposal["expression"], str) or len(proposal["expression"]) > 200:
         raise WorkflowError("Provider expression exceeds limit or has invalid type")

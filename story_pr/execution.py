@@ -125,7 +125,7 @@ def execute(plan, approval, root, runs):
             existing = json.loads((directory / "report.json").read_text(encoding="utf-8"))
             return existing
         directory.mkdir()
-        started = time.monotonic()
+        started = time.perf_counter()
         try:
             # Copy only the allowed file. No git hooks, repo code, tools or tests are executed.
             with tempfile.TemporaryDirectory(prefix="story-pr-") as workspace:
@@ -145,7 +145,7 @@ def execute(plan, approval, root, runs):
                       "base_file_sha256": fingerprint(before), "target": str(target),
                       "status": "passed" if passed else "failed", "publication_allowed": passed,
                       "criteria": evidence, "diff": diff, "usage": plan["usage"],
-                      "verification_seconds": round(time.monotonic()-started, 6),
+                      "verification_seconds": round(time.perf_counter()-started, 6),
                       "execution": "restricted AST interpretation; arbitrary generated-code execution disabled"}
         except WorkflowError as exc:
             report = {"version": 1, "run_id": run_id, "mode": plan["mode"], "status": "blocked",

@@ -1,0 +1,128 @@
+
+FIXTURE success; explicit synthetic approval: 8134e684a230899dbca1d2e63dd70cd53f799c4259944fb11a0d705a391dffc6
+{
+  "mode": "fixture",
+  "status": "passed",
+  "publication_allowed": true,
+  "criteria": [
+    {
+      "id": "AC1",
+      "text": "Orders below 50 dollars pay 5 dollars shipping.",
+      "status": "verified",
+      "code": "sample/shipping.py:5",
+      "cases": [
+        {
+          "subtotal": 0,
+          "expected": 5,
+          "observed": 5,
+          "passed": true
+        },
+        {
+          "subtotal": 10,
+          "expected": 5,
+          "observed": 5,
+          "passed": true
+        },
+        {
+          "subtotal": 49.99,
+          "expected": 5,
+          "observed": 5,
+          "passed": true
+        }
+      ],
+      "scope": "Trusted finite examples via restricted AST interpreter; not exhaustive proof"
+    },
+    {
+      "id": "AC2",
+      "text": "Orders of at least 50 dollars pay no shipping.",
+      "status": "verified",
+      "code": "sample/shipping.py:5",
+      "cases": [
+        {
+          "subtotal": 50,
+          "expected": 0,
+          "observed": 0,
+          "passed": true
+        },
+        {
+          "subtotal": 50.01,
+          "expected": 0,
+          "observed": 0,
+          "passed": true
+        },
+        {
+          "subtotal": 1000,
+          "expected": 0,
+          "observed": 0,
+          "passed": true
+        }
+      ],
+      "scope": "Trusted finite examples via restricted AST interpreter; not exhaustive proof"
+    }
+  ],
+  "diff": "--- a/sample/shipping.py\n+++ b/sample/shipping.py\n@@ -2,4 +2,4 @@\n \n \n def shipping_fee(subtotal):\n-    return 5\n+    return 0 if subtotal >= 50 else 5\n"
+}
+
+FIXTURE failed_verification; explicit synthetic approval: b7d7795284982f496f9b6569c06d7756bfe4b0887eefed8512539acf8f575c30
+{
+  "mode": "fixture",
+  "status": "failed",
+  "publication_allowed": false,
+  "criteria": [
+    {
+      "id": "AC1",
+      "text": "Orders below 50 dollars pay 5 dollars shipping.",
+      "status": "verified",
+      "code": "sample/shipping.py:5",
+      "cases": [
+        {
+          "subtotal": 0,
+          "expected": 5,
+          "observed": 5,
+          "passed": true
+        },
+        {
+          "subtotal": 10,
+          "expected": 5,
+          "observed": 5,
+          "passed": true
+        },
+        {
+          "subtotal": 49.99,
+          "expected": 5,
+          "observed": 5,
+          "passed": true
+        }
+      ],
+      "scope": "Trusted finite examples via restricted AST interpreter; not exhaustive proof"
+    },
+    {
+      "id": "AC2",
+      "text": "Orders of at least 50 dollars pay no shipping.",
+      "status": "unmet",
+      "code": "sample/shipping.py:5",
+      "cases": [
+        {
+          "subtotal": 50,
+          "expected": 0,
+          "observed": 5,
+          "passed": false
+        },
+        {
+          "subtotal": 50.01,
+          "expected": 0,
+          "observed": 5,
+          "passed": false
+        },
+        {
+          "subtotal": 1000,
+          "expected": 0,
+          "observed": 5,
+          "passed": false
+        }
+      ],
+      "scope": "Trusted finite examples via restricted AST interpreter; not exhaustive proof"
+    }
+  ],
+  "diff": ""
+}
