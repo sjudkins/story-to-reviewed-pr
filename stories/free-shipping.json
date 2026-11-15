@@ -1,0 +1,8 @@
+{
+  "title": "Free shipping for qualifying orders",
+  "body": "As a shopper I want free shipping on orders of at least 50 dollars.",
+  "criteria": [
+    "Orders below 50 dollars pay 5 dollars shipping.",
+    "Orders of at least 50 dollars pay no shipping."
+  ]
+}
