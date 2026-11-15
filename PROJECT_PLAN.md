@@ -31,9 +31,9 @@ from a chat subscription. Record usage and cost only when measurable.
   ShayneJudkins; no local Git Credential Manager accounts; gh absent.
 - [x] Inspect scheduling: supported Codex automation tool available; no existing
   automation files found.
-- [ ] Create public personal repository story-to-reviewed-pr, verify push access,
+- [x] Create public personal repository story-to-reviewed-pr, verify push access,
   establish default branch, then create codex/story-to-reviewed-pr.
-- [ ] Obtain start date/time in America/Chicago and create one project schedule.
+- [x] Obtain start date/time in America/Chicago and create one project schedule.
 
 ## Daily milestones
 
@@ -73,10 +73,14 @@ Deployed Engineer bullets. Do not invent adoption, savings, customers, or result
 user's start date/time. Repository creation and unattended push access unresolved.
 Confirmed personal account: sjudkins. Created public repository
 https://github.com/sjudkins/story-to-reviewed-pr with initial README on main.
-Local origin is connected and main fetched/checked out. Push dry-run is awaiting
-Git authentication; development branch has not yet been created.
+Local origin is connected and main fetched/checked out. Push dry-run passed;
+codex/story-to-reviewed-pr created and setup plan committed/pushed successfully.
 Requested schedule: November 16, 2026 at 8:13 PM America/Chicago, targeting
-November 16–20. Supported tool rendered an anchored schedule proposal for user
-review; activation is not yet verified. Do not create a duplicate schedule.
+November 16–20. Active automation: story-to-reviewed-pr-daily-milestone.
+Created through the supported Codex scheduling tool, daily at 20:13 local time.
+The direct-create tool rejects anchored DTSTART, so a mandatory prompt guard exits
+without work before November 16 (there may be a no-op November 15 invocation).
+Continue beyond November 20 only if unfinished; disable after milestone 5 passes.
+Do not activate the earlier unsaved proposal or create a duplicate schedule.
 Bundled interpreter found under the CodexPrimaryRuntime dependencies/python folder;
 the Python command on PATH points to an inaccessible Windows Store alias.
